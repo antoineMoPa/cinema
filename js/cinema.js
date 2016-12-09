@@ -44,8 +44,10 @@ function cinema(files){
     
     // The main canvas
     var canvas = qsa(".result-canvas")[0];
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    var ww = window.innerWidth;
+    var wh = window.innerHeight;
+    canvas.width = ww;
+    canvas.height = wh;
     
     var matches =
         window.location.href.match(
@@ -64,8 +66,9 @@ function cinema(files){
 
     function next_file(){
         current_file_index++;
-        current_file_index %= files.length;
+        current_file_index = current_file_index % files.length;
         load_file("./glsl/" + files[current_file_index], update_shader);
+        console.log(current_file_index);
     }
 
     canvas.addEventListener("click", function(){
