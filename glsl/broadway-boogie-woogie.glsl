@@ -57,22 +57,11 @@ vec4 blocks(int x, int y){
     return col;
 }
 
-void main(void){
-    float xs = UV.x * ratio;
-    float ys = UV.y;
-    float pi2t = PI2 * slowtime;
-
-    xs += smooth_mouse.x;
-    ys += smooth_mouse.y;
-    
+vec4 bbw(int x, int y){
+    float pi2t = PI2 * slowtime;    
     vec4 col = vec4(0.0);
     
     int color = 0;
-    
-    float size = 40.0;
-    
-    int x = int(floor(xs * size));
-    int y = int(floor(ys * size));
     
     if(sini(30000 * x) + abs(sini(200 * x)) < 0.0){
     	// Yellow x
@@ -91,7 +80,7 @@ void main(void){
         
         if(blue < 0.4){
         	blue = 0.0;
-
+            
             float red = squares(x - 2, y - 3);
             
             if(red < 0.2){
@@ -137,6 +126,32 @@ void main(void){
         vec4 blocks = blocks(x, y);
         col = blocks.a * blocks + (1.0 - blocks.a) * col;
     }
+
+    return col;
+}
+
+void main(void){
+    float xs = UV.x * ratio;
+    float ys = UV.y;
+
+    float size = 40.0;
+    
+    xs += smooth_mouse.x;
+    ys += smooth_mouse.y;
+    int x = int(floor(xs * size));
+    int y = int(floor(ys * size));
+    
+    vec4 col = vec4(0.0);
+
+    col += bbw(x, y);
+
+    // edges detail
+    vec2 square_pos = vec2(xs * size - float(x), ys * size - float(y));
+    square_pos -= vec2(0.5, 0.5);
+    col *= 1.0 - pow(length(1.0 * square_pos), 2.0);
+
+    col *= 1.0 + 0.1 * cos(2000000.0 * xs);
+    col *= 1.0 + 0.1 * cos(2000000.0 * ys);
     
     col.a = 1.0;
     
