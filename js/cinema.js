@@ -67,10 +67,20 @@ function cinema(files){
     function next_file(){
         current_file_index++;
         current_file_index = current_file_index % files.length;
-        load_file("./glsl/" + files[current_file_index], update_shader);
-        console.log(current_file_index);
+        load_current();
     }
 
+    function load_current(){
+        var title = qsa(".cinema-title a")[0];
+        var name = files[current_file_index];
+        var url = window.location.href.replace(/\?.*$/,"");
+        url += "?file=" + name;
+        title.href = url;
+        
+        title.innerHTML = name;
+        load_file("./glsl/" + name, update_shader);
+    }
+    
     canvas.addEventListener("click", function(){
         next_file();
     });
@@ -236,7 +246,15 @@ function cinema(files){
     var vertex_code = load_script("vertex-shader");
     var fragment_code = "";
 
-    load_file("./glsl/" + files[0], update_shader);
+    var match = /\?file=(.*)/.exec(window.location.href);
+
+    if(match != null){
+        var name = match[1];
+        var index = files.indexOf(name);
+        current_file_index = index;
+    }
+    
+    load_current();
     
     function draw(){
         draw_ctx(canvas, res_ctx);
