@@ -73,7 +73,7 @@ function cinema(files){
 
     function next_file(){
         current_file_index++;
-        current_file_index = current_file_index % files.length;
+        current_file_index = current_file_index % (files.length - 1);
         load_current();
         add_to_history();
     }

@@ -36,7 +36,6 @@ something.glsl
 sphere.glsl
 stars_zoom.glsl
 sunrise-glitch.glsl
-this-is-a-rectangle.glsl
 this-is-a-sin.glsl
 trees.glsl
 unzoom.glsl
