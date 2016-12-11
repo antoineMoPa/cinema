@@ -76,10 +76,25 @@ function cinema(files){
         var url = window.location.href.replace(/\?.*$/,"");
         url += "?file=" + name;
         title.href = url;
-        window.history.pushState("", name, url);
+
+        window.history.pushState(
+            {index: current_file_index},
+            name, url
+        );
+        
         title.innerHTML = name;
         load_file("./glsl/" + name, update_shader);
     }
+
+    window.onpopstate = function(event){
+        try{
+            var state = event.state;
+            current_file_index = state.index || 0;
+            load_current();
+        } catch (e){
+            // do nothing
+        }
+    };
     
     canvas.addEventListener("click", function(){
         next_file();

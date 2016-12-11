@@ -6,7 +6,6 @@ breathing.glsl
 bridge.glsl
 burning-ship.glsl
 circles.glsl
-clean-rainbow.glsl
 cos-sin.glsl
 crazy-sin.glsl
 cylinders.glsl
@@ -27,11 +26,10 @@ mandelglitch.glsl
 mandelbrot-ufo.glsl
 matrix-city.glsl
 mod.glsl
-my-eyes-are-dying-but-less.glsl
-my-eyes-are-dying.glsl
+clean-rainbow.glsl
 not-3d-rainbow.glsl
-penguin-mandelbrot.glsl
 rainbow-flag.glsl
+penguin-mandelbrot.glsl
 random-typing-on-my-keyboard.glsl
 retro-post-process-frag.glsl
 rio.glsl
