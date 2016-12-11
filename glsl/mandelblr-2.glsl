@@ -3,7 +3,7 @@ precision highp float;
 
 varying vec2 UV;
 varying vec3 v_position;
-uniform float time;
+uniform float slowtime;
 uniform float ratio;
 uniform vec2 mouse;
 
@@ -29,7 +29,7 @@ void main(void){
     vec4 col = vec4(54.0, 70.0, 93.0, 0.0)/255.0;
    	col.a = 1.0;
 	
-    float sintime = sin(2.0 * 3.1416 * time);	
+    float sintime = sin(2.0 * 3.1416 * slowtime);	
     
 	highp vec2 z = vec2(0.0, 0.0);
 	highp vec2 c = vec2(x, y);

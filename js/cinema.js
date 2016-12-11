@@ -201,17 +201,22 @@ function cinema(files){
     
     function draw_ctx(can, ctx, time){
         // Set time attribute
-        var tot_time = anim_len * anim_delay;
-        
-        var time = time ||
+        var time = 
             parseFloat(
-                ((new Date()).getTime() % tot_time)
-                    /
-                    tot_time
+                ((new Date()).getTime() % 1000) / 1000
             );
         
         var timeAttribute = ctx.getUniformLocation(ctx.program, "time");
         ctx.uniform1f(timeAttribute, time);
+
+        // Set time attribute
+        var slow_time = 
+            parseFloat(
+                ((new Date()).getTime() % 3000) / 3000
+            );
+        
+        var slowTimeAttribute = ctx.getUniformLocation(ctx.program, "slowtime");
+        ctx.uniform1f(slowTimeAttribute, slow_time);
         
         // Screen ratio
         var ratio = can.width / can.height;

@@ -19,8 +19,8 @@ jellyfish-more-shading.glsl
 julia-ball.glsl
 juliablr.glsl
 mandelBURN.glsl
-mandelblr-2.glsl
 mandelblr.glsl
+mandelblr-2.glsl
 mandelbrot-explosion.glsl
 mandelbrot-flame.glsl
 mandelbrot-ufo.glsl

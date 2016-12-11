@@ -141,7 +141,7 @@ void main(void){
     vec4 col = vec4(0.0);
     
     col += stars(vec2(x,y), time);
-    col += grid_with_angle(vec2(x,y), time);
+    col += grid_with_angle(vec2((x - 0.5) / ratio,y) * 2.0, time);
     col += triangles(vec2(x,y),time);
     
     col.a = 1.0;
