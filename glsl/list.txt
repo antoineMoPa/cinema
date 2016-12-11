@@ -16,7 +16,6 @@ fire-fractal.glsl
 glitch-ball-mandelbrot.glsl
 grid.glsl
 jellyfish-more-shading.glsl
-jellyfish.glsl
 julia-ball.glsl
 julia.glsl
 juliablr.glsl
