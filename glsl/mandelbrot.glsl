@@ -2,9 +2,10 @@
 precision highp float;
 
 varying vec2 UV;
+uniform vec2 smooth_mouse;
 varying vec3 v_position;
 uniform float time;
-
+uniform float ratio;
 
 /*
   Complex square
@@ -23,12 +24,12 @@ highp vec2 to_the_2(highp vec2 z){
 
 
 void main(void){
-    float x = (UV.x - 0.5)*3.0;
-    float y = (UV.y - 0.5)*3.0;
+    float x = (UV.x - 0.5) * ratio * 3.0;
+    float y = (UV.y - 0.5) * 3.0;
 
-	highp vec2 z = vec2(0,time/10000.0);
+	highp vec2 z = vec2(0.0);
 	highp vec2 c = vec2(x,y);
-
+    z = smooth_mouse - vec2(1.0, -0.5);
     float maxit = 0.0;    
   
 	for(int i = 0; i < 20; i++){

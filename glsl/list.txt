@@ -21,9 +21,9 @@ juliablr.glsl
 mandelBURN.glsl
 mandelblr.glsl
 mandelblr-2.glsl
+mandelbrot.glsl
 mandelbrot-explosion.glsl
 mandelbrot-ufo.glsl
-mandelbrot.glsl
 mandelglitch.glsl
 matrix-city.glsl
 mod.glsl
