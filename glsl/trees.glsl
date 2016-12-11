@@ -9,9 +9,10 @@ uniform vec2 mouse;
 
 #define PI 3.1416
 #define PI2 (2.0 * PI)
+
 void main(void){
-    float x = UV.x * ratio;
-    float y = UV.y;
+    float x = (UV.x - 0.5) * ratio;
+    float y = UV.y - 0.5;
     
     vec4 col = vec4(0.0);
    
@@ -21,7 +22,7 @@ void main(void){
  		float width = 0.001 * pow(float(i),1.4);
     	float branch = 
         	cos(
-            	(30.14 * lastbranch) * x + 0.1 * float(i) - 2.0 * PI * time - 0.5
+            	(30.14 * lastbranch) * x + 0.1 * float(i) + PI2 * time - 0.5
 			) * (y + 0.04 * float(i)) - 0.1;
 		if (y < 0.1 * float(i) + 0.1){
     		if(abs(branch) < width){

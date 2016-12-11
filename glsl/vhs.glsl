@@ -5,7 +5,7 @@ varying vec2 UV;
 varying vec3 v_position;
 uniform float time;
 uniform float ratio;
-uniform vec2 mouse;
+uniform vec2 smooth_mouse;
 
 #define PI 3.1416
 #define PI2 (2.0 * PI)
@@ -46,11 +46,10 @@ float vhs(vec2 pos, float col, float t){
     col += noise;
     
     col *= 1.0 + 0.1 * (sin(PI2 * time) + 0.1 * sin(4.0 * PI2 * time));
+
+    col *= 1.0 - distance(pos, vec2(0.5 * ratio, 0.5));
     
-    float d = pow(length(pos - vec2(0.5 + 0.1 * cos(20.0 * pos.x + 23.0 * pos.y),0.5)),2.0);
-    col *= 1.0 - 2.0 * d;
-    
-	return col;
+    return col;
 }
 
 void main(void){
@@ -59,7 +58,7 @@ void main(void){
 	
     vec2 pos = vec2(x,y);
     
-    vec2 mod_pos = vhspos(pos, time);
+    vec2 mod_pos = vhspos(pos + 0.3 * smooth_mouse, time);
     
     x = mod_pos.x;
     y = mod_pos.y;
@@ -82,7 +81,7 @@ void main(void){
 
 	bool arrow = arr(x, y);
 
-	if(y < 0.1){
+    if(y < 0.1){
 		arrow = false;
 	} else if(y > 0.9){
 		arrow = false;

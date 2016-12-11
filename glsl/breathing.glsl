@@ -3,9 +3,9 @@ precision highp float;
 
 varying vec2 UV;
 varying vec3 v_position;
-uniform float time;
+uniform float slowtime;
 uniform float ratio;
-uniform vec2 mouse;
+uniform vec2 smooth_mouse;
 
 #define PI 3.1416
 #define PI2 (2.0 * PI)
@@ -32,6 +32,7 @@ void main(void){
     vec4 col = vec4(0.0);
     
     vec2 z = vec2(0.0, 0.0);
+    z = smooth_mouse - vec2(1.0, -0.5);    
     vec2 c = vec2(-y+0.4, x - 0.5 * ratio);
 	c *= 5.0;
     float maxit = 0.0;
@@ -42,7 +43,7 @@ void main(void){
        	
         z = 1.0 * to_the_2(z) + 0.1 * z + c;
         
-        if(length(z) > 1.0 * cos(time * PI2) + 2.4){
+        if(length(z) > 1.0 * cos(slowtime * PI2) + 2.4){
         	maxit = float(i);
         	break;
         }

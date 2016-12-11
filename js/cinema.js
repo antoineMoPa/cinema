@@ -97,7 +97,8 @@ function cinema(files){
         var url = window.location.href.replace(/\?.*$/,"");
         url += "?file=" + name;
         title.href = url;
-        title.innerHTML = name;
+        var indicator = (current_file_index + 1) + " of " + (files.length - 1);
+        title.innerHTML = name + " [" + indicator + "]";
         load_file("./glsl/" + name, update_shader);
     }
 
