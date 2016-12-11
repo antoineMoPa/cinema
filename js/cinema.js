@@ -44,17 +44,24 @@ function cinema(files){
     
     // The main canvas
     var canvas = qsa(".result-canvas")[0];
-    var ww = window.innerWidth;
-    var wh = window.innerHeight;
-    canvas.width = ww;
-    canvas.height = wh;
+    var ratio;
+    
+    function resize(){
+        var ww = window.innerWidth;
+        var wh = window.innerHeight;
+        canvas.width = ww;
+        canvas.height = wh;
+        ratio = canvas.width / canvas.height;
+    }
+
+    resize();
+
+    window.addEventListener("resize", resize);
     
     var matches =
         window.location.href.match(
                 /\?file\=([a-zA-Z0-9\/]+\.glsl)/
         );
-    
-    var ratio = canvas.width / window.height;
     
     var res_ctx = canvas.getContext("webgl");
     

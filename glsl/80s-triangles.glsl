@@ -53,8 +53,10 @@ vec4 grid_with_angle(vec2 pos, float t){
     }
     
     if(pos.y < 0.38){
-        pos.x -= 0.5;
+        pos.x -= 1.0 * ratio;
         pos.x *= pos.y + 0.5;
+        pos.x += 1.0 * ratio;
+
         pos.y += t/8.0;
 
         col += grid(pos) * intensity;
@@ -141,7 +143,7 @@ void main(void){
     vec4 col = vec4(0.0);
     
     col += stars(vec2(x,y), time);
-    col += grid_with_angle(vec2((x - 0.5) / ratio,y) * 2.0, time);
+    col += grid_with_angle(vec2(x, y) * 2.0, time);
     col += triangles(vec2(x,y),time);
     
     col.a = 1.0;
