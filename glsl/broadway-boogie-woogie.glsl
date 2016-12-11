@@ -29,6 +29,34 @@ float squares(int x, int y){
     return num;
 }
 
+vec4 blocks(int x, int y){
+    vec4 col = vec4(0.0);
+    float fx = float(x);
+    float fy = float(y);
+
+    if(cos(fx/2.0) * cos(fy/4.0) < 0.0){
+        if(cos(fx / 5.0) * cos(fy / 3.0) < 0.0){
+            if(cos(fx / 1.5) * cos(fy / 2.0) < 0.0){
+                if(cos(fx/6.0) * cos(fy / 7.0) < 0.0){
+                    if(cos(fx/5.0) * cos(fy / 8.0) < 0.0){
+                        col.b = 1.0;
+                        col.a = 1.0;
+                    } else if (cos(fx/8.0) * cos(fy / 7.0) < 0.0) {
+                        col.r = 1.0;
+                        col.g = 1.0;
+                        col.a = 1.0;
+                    } else {
+                        col.r = 1.0;
+                        col.a = 1.0;
+                    }
+                }
+            }
+        }
+    }
+    
+    return col;
+}
+
 void main(void){
     float xs = UV.x * ratio;
     float ys = UV.y;
@@ -106,6 +134,8 @@ void main(void){
         
     } else {
         col = vec4(0.9, 0.9, 0.9, 1.0);
+        vec4 blocks = blocks(x, y);
+        col = blocks.a * blocks + (1.0 - blocks.a) * col;
     }
     
     col.a = 1.0;
