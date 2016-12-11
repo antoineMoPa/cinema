@@ -25,6 +25,7 @@ glitch-ball-mandelbrot.glsl
 mandelglitch.glsl
 mandelbrot-ufo.glsl
 matrix-city.glsl
+matrix-city-2.glsl
 mod.glsl
 clean-rainbow.glsl
 not-3d-rainbow.glsl
