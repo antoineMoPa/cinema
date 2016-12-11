@@ -22,7 +22,7 @@ void main(void){
     col.g = 0.3 * sin((13.0 + 0.006 * cos(time*PI2 + 30.0 * pos.x)) * x + y + PI2 * time + 0.3);
     col.b = 0.3 * sin((13.0) * x + y + PI2 * time + 0.3);
     
-    if(distance(pos, vec2(0.5,0.5)) > 0.4){
+    if(distance(pos, vec2(0.5 * ratio, 0.5)) > 0.4){
     	col *= 0.0;
     }
     

@@ -37,7 +37,9 @@ float curve(float t){
 vec4 stars_zoom(vec2 pos, float t){
     vec4 col = vec4(0.0);
     
-    pos -= 0.5;
+    pos.x -= 0.5 * ratio;
+    pos.y -= 0.5;
+    
     vec2 pos1 = pos * (3.0 - t);
     vec2 pos2 = pos * (3.5 - t);
     pos2.x += 0.41;
@@ -59,7 +61,7 @@ vec4 stars_zoom(vec2 pos, float t){
 
 vec4 rect(vec2 v, float start, float width, vec4 color, float t){
     vec4 col = vec4(0.0);
-    v.x -= 0.5;
+    v.x -= 0.5 * ratio;
     v.y -= 0.5;
     
     v.x = abs(v.x);
@@ -67,12 +69,12 @@ vec4 rect(vec2 v, float start, float width, vec4 color, float t){
     v.y = v.y / (10.9 * v.x + 1.0);
     v.x = v.x / (3.9 * v.x + 1.0);
     
-    v.y *= 3.0;
+    v.y *= 4.8;
     
-    if(v.x < 0.01){
+    if(v.x < 0.001){
         return col;
     }
-    
+
     if(v.y > start && v.y < start + width){
         if(cos(50.0 * v.x - PI2 * t ) < 0.1){
             col += color * (0.2 + 0.9 * pow(2.0 * v.x,2.0));
@@ -91,13 +93,13 @@ vec4 rects(float x, float y, float time){
         float g = 0.4 * mod(seed + 0.2, 1.0);
         float b = 0.4 * mod(seed + 0.13, 1.0);
         
-        col += rect(vec2(x, y),
-		1.0 / 20.0 * float(i) - 0.5,
-		0.02 + 0.04 * cos(seed) * r,
-		vec4(r,g,b,0.0),
-		time + seed
-		);
-        
+        col += rect(
+            vec2(x, y),
+            1.0 / 20.0 * float(i) - 0.5,
+            0.02 + 0.04 * cos(seed) * r,
+            vec4(r,g,b,0.0),
+            time + seed
+            );
     }
     
     col *= pow(5.0 * abs(2.0 * (x - 0.5)),1.0);
@@ -116,11 +118,11 @@ void main(void){
     col.r += 0.02 * cos(cos((1.0 - length(vec2(x,y) - 0.5)) * 2.0) + 0.8);
     col.b += 0.01 * cos(PI2 * time - cos((1.0 - length(vec2(x,y) - 0.5)) * 3.0));
     
+    col += 0.2 * rects(x, y, time);
     
-    
-    col += 0.3 * rects(x, y, time);
-    
-    vec4 vignette = col * pow(1.0 - distance(vec2(x, y), vec2(0.5, 0.5)),2.0);
+    vec4 vignette =
+        col *
+        pow(1.0 - distance(vec2(x, y), vec2(0.5 * ratio, 0.5)), 2.0);
     col = vignette;
     
     col.a = 1.0;
