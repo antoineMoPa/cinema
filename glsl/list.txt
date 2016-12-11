@@ -22,7 +22,6 @@ mandelBURN.glsl
 mandelblr.glsl
 mandelblr-2.glsl
 mandelbrot-explosion.glsl
-mandelbrot-flame.glsl
 mandelbrot-ufo.glsl
 mandelbrot.glsl
 mandelglitch.glsl
