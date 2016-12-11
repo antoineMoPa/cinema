@@ -44,11 +44,35 @@ button{
     position: absolute;
     top:0;
     left:0;
+    height:20px;
+    line-height:20px;
+    font-size:20px;
 }
 
 .cinema-title a{
     font-weight:300;
     color:#fff;
     text-decoration: none;
-    text-shadow:1px 1px 0 #333, -1px -1px 0 #444;
+    text-shadow:1px 1px 0 rgba(0, 0, 0, 0.2), -1px -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cinema-controls{
+    position:absolute;
+    bottom:0px;
+    right:10px;
+}
+
+.cinema-previous, .cinema-next{
+    color:#fff;
+    background: rgba(0, 0, 0, 0.1);
+    padding:4px;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.cinema-previous:hover, .cinema-next:hover{
+    background: rgba(0, 0, 0, 0.4);
 }

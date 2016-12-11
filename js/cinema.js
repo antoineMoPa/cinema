@@ -29,7 +29,16 @@ function load_file(filename, callback){
 }
 
 load_file("glsl/list.txt", function(files){
-    cinema(files.split("\n"));
+    var files = files.split("\n");
+
+    // Remove empty lines
+    for(f in files){
+        if(files[f] == ""){
+            files.splice(f, 1);
+        }
+    }
+
+    cinema(files);
 });
 
 function cinema(files){
@@ -78,6 +87,22 @@ function cinema(files){
         add_to_history();
     }
 
+    function prev_file(){
+        current_file_index--;
+
+        if(current_file_index < 0){
+            current_file_index = files.length - 2;
+        }
+
+        current_file_index = current_file_index % (files.length - 1);
+        load_current();
+        add_to_history();
+    }
+
+    // Enable prev/next buttons
+    qsa(".cinema-previous")[0].addEventListener("click", prev_file);
+    qsa(".cinema-next")[0].addEventListener("click", next_file);
+    
     function add_to_history(){
         // Add to browser history to enable
         // Back button
