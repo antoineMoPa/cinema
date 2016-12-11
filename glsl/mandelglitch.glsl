@@ -24,10 +24,6 @@ vec4 glitch_ball(vec2 pos){
     
     col = abs(col);
     
-    if(distance(pos, vec2(0.5,0.5)) > 0.4){
-    	col *= 0.0;
-    }
-    
     col.a = 1.0;
     return col;
 }
@@ -48,12 +44,12 @@ highp vec2 to_the_2(highp vec2 z){
 }
 
 void main(void){
-    float x = UV.x * ratio;
+    float x = (UV.x) * ratio;
     float y = UV.y;
     
     vec4 col = vec4(0.0);
     
-    vec2 c = vec2( -y + 0.5, x - 0.5);
+    vec2 c = vec2( -y + 0.5, x - 0.5 * ratio);
     vec2 z = vec2(0.0, 0.0);
 	c *= 4.0;
     c.x -= 0.5;

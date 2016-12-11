@@ -20,10 +20,6 @@ vec4 glitch_ball(vec2 pos){
     
     col = abs(col);
     
-    if(distance(pos, vec2(0.5,0.5)) > 0.4){
-    	col *= 0.0;
-    }
-    
     col.a = 1.0;
     return col;
 }
