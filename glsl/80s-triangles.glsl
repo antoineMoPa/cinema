@@ -110,6 +110,9 @@ vec4 triangle(vec2 pos, float t){
     pos.x += 0.01 * cos(PI2 * time);
     
     pos.y = 1.0 - pos.y;
+
+    pos.x += 0.5;
+    pos.x -= 0.5 * ratio;
     
    	col += line(pos, vec2(0.2,0.3), vec2(0.5,0.8), 0.01, t);
     col += line(pos, vec2(0.5,0.8), vec2(0.8,0.3), 0.01, t);

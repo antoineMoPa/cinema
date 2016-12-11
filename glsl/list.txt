@@ -1,7 +1,4 @@
-80s-line.glsl
 80s-triangles.glsl
-80s.glsl
-Mandelbrot.glsl
 arrow-shader.glsl
 arrows+magnifier.glsl
 blue.glsl
