@@ -57,24 +57,53 @@ void main(void){
     }
     
     if( (color == 1 || color == 2)){
-        col = vec4(0.9, 0.8, 0.1, 1.0);
+        col = vec4(0.0, 0.0, 0.0, 1.0);
         
     	float blue = squares(x, y) - squares(x - 2, y - 1);
-       	
+        
         if(blue < 0.4){
         	blue = 0.0;
+
+            float red = squares(x - 2, y - 3);
             
-        	float red = squares(x - 2, y - 3);
-            col.r += red;
-            col.g -= red;
-            col.b -= red;
+            if(red < 0.2){
+                float yellow = squares(-x - 3, y - 4);
+                yellow += squares(-x - 4, y - 1);
+                yellow += squares(-x - 2, y - 1);
+                yellow += squares(-x - 4, y - 2);
+                
+                if(yellow > 0.9){
+                    col = yellow * vec4(1.0, 1.0, 0.0, 1.0);
+                }
+            } else {
+                col.r += red;
+                col.g -= red;
+                col.b -= red;
+            }
+
+            blue = 0.0;
         } else {
-        	blue = 1.0;
+            col.b += blue;
+            col.r -= blue;
+            col.g -= blue;
+        }
+
+        if(col.r < 0.0){
+            col.r = 0.0;
         }
         
-    	col.b += blue;
-        col.r -= blue;
-        col.g -= blue;
+        if(col.g < 0.0){
+            col.g = 0.0;
+        }
+        
+        if(col.b < 0.0){
+            col.b = 0.0;
+        }
+
+        if(col.r + col.g + col.b < 0.3){
+            col = vec4(0.6, 0.6, 0.6, 1.0);
+        }
+        
     } else {
         col = vec4(0.9, 0.9, 0.9, 1.0);
     }
