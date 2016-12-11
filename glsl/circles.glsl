@@ -71,10 +71,10 @@ bool is_border(vec2 uv, float t){
 }
 
 void main(void){
-    float x = UV.x;
+    float x = UV.x * ratio;
     float y = UV.y;
     
-    float d = distance(vec2(x,y),vec2(0.5,0.5));
+    float d = distance(vec2(x,y),vec2(0.5 * ratio,0.5));
     
     float angle = atan(y,x);
     
