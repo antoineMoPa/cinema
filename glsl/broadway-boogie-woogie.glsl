@@ -40,10 +40,12 @@ vec4 blocks(int x, int y){
                 if(cos(fx/6.0) * cos(fy / 7.0) < 0.0){
                     if(cos(fx/5.0) * cos(fy / 8.0) < 0.0){
                         col.b = 1.0;
+                        col.r = 0.1;
+                        col.g = 0.1;
                         col.a = 1.0;
                     } else if (cos(fx/8.0) * cos(fy / 7.0) < 0.0) {
-                        col.r = 1.0;
-                        col.g = 1.0;
+                        col.r = 0.9;
+                        col.g = 0.8;
                         col.a = 1.0;
                     } else {
                         col.r = 1.0;
@@ -84,13 +86,13 @@ vec4 bbw(int x, int y){
             float red = squares(x - 2, y - 3);
             
             if(red < 0.2){
-                float yellow = squares(-x - 3, y - 4);
-                yellow += squares(-x - 4, y - 1);
-                yellow += squares(-x - 2, y - 1);
-                yellow += squares(-x - 4, y - 2);
+                float gray = squares(-x - 3, y - 4);
+                gray += squares(-x - 4, y - 1);
+                gray += squares(-x - 2, y - 1);
+                gray += squares(-x - 4, y - 2);
                 
-                if(yellow > 0.9){
-                    col = yellow * vec4(1.0, 1.0, 0.0, 1.0);
+                if(gray > 0.9){
+                    col = gray * vec4(0.6, 0.6, 0.6, 1.0);
                 }
             } else {
                 col.r += red;
@@ -101,8 +103,8 @@ vec4 bbw(int x, int y){
             blue = 0.0;
         } else {
             col.b += blue;
-            col.r -= blue;
-            col.g -= blue;
+            col.r -= 0.8 * blue;
+            col.g -= 0.8 * blue;
         }
 
         if(col.r < 0.0){
@@ -118,7 +120,7 @@ vec4 bbw(int x, int y){
         }
 
         if(col.r + col.g + col.b < 0.3){
-            col = vec4(0.6, 0.6, 0.6, 1.0);
+            col = vec4(1.0, 0.8, 0.0, 1.0);
         }
         
     } else {
@@ -148,10 +150,17 @@ void main(void){
     // edges detail
     vec2 square_pos = vec2(xs * size - float(x), ys * size - float(y));
     square_pos -= vec2(0.5, 0.5);
-    col *= 1.0 - pow(length(1.0 * square_pos), 2.0);
+    col *= (1.0 - pow(length(1.0 * square_pos), 2.0)) * 0.1 + 0.9;
 
-    col *= 1.0 + 0.1 * cos(2000000.0 * xs);
-    col *= 1.0 + 0.1 * cos(2000000.0 * ys);
+    // Some horizontal line shading
+    if(square_pos.y > 0.4){
+        vec4 other_col = bbw(x, y + 1);
+        if(length(abs(other_col - col)) > 0.1){
+            float pos = (square_pos.y - 0.4)/0.1;
+            col = pos * other_col + (1.0 - pos) * col;
+            col -= 0.1;
+        }
+    }
     
     col.a = 1.0;
     
