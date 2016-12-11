@@ -44,10 +44,14 @@ void main(void){
 
 	vec4 col = vec4(0.0);
 
-	float d = distance(vec2(x,y),vec2(0.5,0.5));
+    vec2 m = mouse;
+
+    m = floor(m*10.0)/10.0;
+    
+	float d = distance(vec2(x,y), m + vec2(0.0 * ratio, 1.0));
     float d2 = 8.0 * pow(d,2.0);
 
-	bool arrow = arrows((x-0.5) * d2 + 0.5, (y-0.5)*d2 + 0.5);
+	bool arrow = arrows((x-0.5 * ratio) * d2 + 0.5, (y-0.5)*d2 + 0.5);
 
 	if(arrow){
 		col = vec4(0.8, 0.8, 0.3, 1.0);
