@@ -35,7 +35,7 @@ vec4 cyl(float x, float y){
 		col.b = cylinder * 0.3;
     	col *= 0.3;
     }
-    
+    col = abs(col);
     return col;
 }
 
@@ -50,8 +50,8 @@ void main(void){
     	col += 1.5 * 
         	cyl(x + 0.1 * float(i),
         	y - 0.046 * float(i));
-            col *= pow(col,vec4(0.5));
-            col.r -= 0.1 * col.r;
+        col *= pow(col,vec4(0.5));
+        col.r -= 0.1 * col.r;
     }
     
     col.a = 1.0;

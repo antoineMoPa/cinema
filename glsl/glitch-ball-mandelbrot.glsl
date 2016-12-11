@@ -24,7 +24,7 @@ vec4 glitch_ball(vec2 pos){
     
     col = abs(col);
     
-    if(distance(pos, vec2(0.5,0.5)) > 0.4){
+    if(distance(pos, vec2(0.5 * ratio,0.5)) > 0.4){
     	col *= 0.0;
     }
     
@@ -53,7 +53,7 @@ void main(void){
     
     vec4 col = vec4(0.0);
     
-    vec2 c = vec2( -y + 0.5, x - 0.5);
+    vec2 c = vec2( -y + 0.5, x - 0.5 * ratio);
     vec2 z = vec2(0.0, 0.0);
 	c *= 4.0;
     c.x -= 0.5;

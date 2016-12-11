@@ -46,7 +46,7 @@ vec4 tentacles(vec2 pos){
             }
         }
     }
-    
+
     return col;
 }
 
@@ -57,9 +57,9 @@ vec4 trippy_circle(vec2 pos){
 
     float angle = atan(pos.y - 0.5, pos.x - 0.5);
 
-    angle = pow(angle, 3.0);
+    angle = 2.0 * pow(angle, 2.0);
     
-    float off = 0.01 * (sin(angle + 2.0 * PI * time) + 1.0);
+    float off = 0.01 * (sin(angle + 2.0 * PI * time));
 
     if(dist < 0.4  - off){
         col = vec4(0.3, 0.2, 0.4, 1.0);
@@ -151,6 +151,6 @@ void main(void){
     
     col += 0.2 * jfish.a *
         tan(2.0 * background(pos + vec2(0.23, 0.0)));
-
+    
     gl_FragColor = col;
 }
