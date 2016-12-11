@@ -10,7 +10,6 @@ cos-sin.glsl
 crazy-sin.glsl
 cylinders.glsl
 disappear.glsl
-even-wawier.glsl
 fire-fractal.glsl
 grid.glsl
 jellyfish-more-shading.glsl
@@ -41,3 +40,4 @@ this-is-a-sin.glsl
 trees.glsl
 vhs.glsl
 waw.glsl
+even-wawier.glsl
