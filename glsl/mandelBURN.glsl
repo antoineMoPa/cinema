@@ -31,8 +31,8 @@ void main(void){
     
     vec4 col = vec4(0.0);
     
-    vec2 z = vec2(0.0, 0.0);
-    vec2 c = vec2(-y + 0.3, x - 0.5);
+    vec2 z = vec2(0.1 + 0.1 * cos(time * PI2), 0.0);
+    vec2 c = vec2(-y + 0.3, x - 0.5 * ratio);
 	c *= 4.0;
     float maxit = 0.0;
     
@@ -41,7 +41,6 @@ void main(void){
    	for(int i = 0; i < 25; i++){
         
         float lz = length(z);
-       	//z = z * 10.0;
         z = 1.0 * to_the_2(z) + 0.1 * z + c;
         
         if(length(z) > 3.0){
@@ -54,12 +53,11 @@ void main(void){
     if(!in_set){
     	col.g = maxit/25.0;
     } else {
-        col.g = length(z) + cos(PI2 * time)/8.0;
+        col.g = length(z) + cos(PI2 * time)/2.0;
         col.r = length(z) + 1.0;
     }
 	
-	//col *= 1.0 - 1.0 * pow(length(vec2(x-0.5,y-0.5)), 2.0);
-    
+	col *= 1.0 - 1.0 * pow(length(vec2(x-0.5 * ratio,y-0.5)), 2.0);
     
     col.a = 1.0;
     

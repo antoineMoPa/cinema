@@ -17,9 +17,7 @@ glitch-ball-mandelbrot.glsl
 grid.glsl
 jellyfish-more-shading.glsl
 julia-ball.glsl
-julia.glsl
 juliablr.glsl
-list.txt
 mandelBURN.glsl
 mandelblr-2.glsl
 mandelblr.glsl

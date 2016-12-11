@@ -7,8 +7,6 @@ uniform float time;
 uniform float ratio;
 uniform vec2 mouse;
 
-
-
 /*
   Complex square
  */
@@ -25,8 +23,8 @@ highp vec2 to_the_2(highp vec2 z){
 }
 
 void main(void){
-    float x = -(UV.y - 0.3)*3.0;
-    float y = (UV.x - 0.5)*3.0;
+    float x = -(UV.y - 0.3) * 3.0;
+    float y = (UV.x - 0.5) * ratio * 3.0;
 	
     vec4 col = vec4(54.0, 70.0, 93.0, 0.0)/255.0;
    	col.a = 1.0;
