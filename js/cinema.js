@@ -76,7 +76,7 @@ function cinema(files){
         var url = window.location.href.replace(/\?.*$/,"");
         url += "?file=" + name;
         title.href = url;
-        
+        window.history.pushState("", name, url);
         title.innerHTML = name;
         load_file("./glsl/" + name, update_shader);
     }
