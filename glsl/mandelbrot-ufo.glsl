@@ -45,7 +45,7 @@ highp vec2 to_the_2(highp vec2 z){
 
 vec4 mandelbrot_glitch(float x, float y){
     vec4 col = vec4(0.0);
-    vec2 c = vec2( -y + 0.5, x - 0.5);
+    vec2 c = vec2( -y + 0.5, x - 0.5 * ratio);
     vec2 z = vec2(0.0, 0.0);
 	c *= 10.0;
     c.x -= 0.5;
@@ -81,14 +81,15 @@ void main(){
 	vec4 col = mandelbrot_glitch(x,y - 0.01 * cos(PI2 * time));
     
     col += 0.7 * mandelbrot_glitch(
-    	x + 0.01 * cos(PI2 * time + 120.3 * y + 1.3 * x),
-        0.5-y - 0.01 * cos(PI2 * time)
+    	x + 0.01 * cos(PI2 * time + 120.3 * y + 80.3 * x),
+        0.5-y - 0.02 * cos(PI2 * time + 80.0 * y)
     );
     
     float horizon = 0.25;
     
     if(y < horizon){
     	col.r += 0.2 - y;
+        col.b += 0.2 - y;
     } else {
     	float sun_fac = 0.1;
         sun_fac *= pow(length(vec2(x,y) - vec2(0.55, -0.2)),2.0) + 5.9;
