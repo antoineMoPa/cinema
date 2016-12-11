@@ -1,16 +1,6 @@
-# ShaderGif
+# Cinema
 
-A tool to play with fragment shaders to create nice 2D images. (Because fragment shaders are awesome.)
-
-Features gif export. (To export a 10 frame gif).
-
-# Uniforms
-
-time - goes from 0.0 to 1.0 and repeats
-
-ratio - The screen ratio (Can be used to adapt the code for the big & small canvases)
-
-mouse - the mouse position
+A place to show GLSL code I made.
 
 # Examples
 
@@ -26,6 +16,6 @@ Bridge: http://a-mo-pa.com/stuff/shadergif/?file=examples/bridge.glsl
 
 ![Bridge](http://67.media.tumblr.com/1c175c8fd49c8be7ad155b7acddc850f/tumblr_oc6ennIUP41svno9go1_500.gif)
 
-#  More images
+#  More
 
 Visit my tumblr, you may find some gifs made with this: http://dontcode.tumblr.com
