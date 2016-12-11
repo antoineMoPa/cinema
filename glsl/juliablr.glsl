@@ -3,7 +3,7 @@ precision highp float;
 
 varying vec2 UV;
 varying vec3 v_position;
-uniform float time;
+uniform float slowtime;
 uniform float ratio;
 uniform vec2 mouse;
 
@@ -30,7 +30,7 @@ void main(void){
    	col.a = 1.0;
 
 	highp vec2 z = vec2(x, y);
-	highp vec2 c = vec2(time, 1.0 * time);
+	highp vec2 c = vec2(slowtime, 1.0 * slowtime);
 
     float maxit = 0.0;    
   

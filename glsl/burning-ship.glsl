@@ -3,7 +3,7 @@ precision highp float;
 
 varying vec2 UV;
 varying vec3 v_position;
-uniform float time;
+uniform float slowtime;
 uniform float ratio;
 uniform vec2 mouse;
 
@@ -41,7 +41,7 @@ void main(void){
    	for(int i = 0; i < 25; i++){
         
         float lz = length(z);
-       	z = abs(z + 0.1 * cos(PI2 * time) - 0.3);
+       	z = abs(z + 0.14 * cos(PI2 * slowtime) - 0.5);
         z = 1.0 * to_the_2(z) + 0.1 * z + c;
         
         if(length(z) > 3.0){

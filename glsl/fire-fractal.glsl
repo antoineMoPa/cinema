@@ -3,7 +3,7 @@ precision highp float;
 
 varying vec2 UV;
 varying vec3 v_position;
-uniform float time;
+uniform float slowtime;
 
 
 /*
@@ -27,7 +27,7 @@ void main(void){
     float y = (UV.y - 0.5)*3.0;
 
     highp vec2 z = vec2(x,y);
-    highp vec2 c = vec2(0.285,mod(time,1000.0)/10.0);
+    highp vec2 c = vec2(0.285,mod(slowtime,1000.0)/10.0);
 
     float maxit = 0.0;    
 

@@ -3,9 +3,9 @@ precision highp float;
 
 varying vec2 UV;
 varying vec3 v_position;
-uniform float time;
+uniform float slowtime;
 uniform float ratio;
-uniform vec2 mouse;
+uniform vec2 smooth_mouse;
 
 #define PI 3.1416
 #define PI2 (2.0 * PI)
@@ -32,11 +32,11 @@ void main(void){
     vec4 col = vec4(0.0);
     
     vec2 z = vec2(0.0, 0.0);
-    vec2 screen = vec2(-y + 0.1, x - 0.1);
+    vec2 screen = vec2(y - smooth_mouse.y - 1.0, x - smooth_mouse.x);
 	vec2 c;
     float angle = atan(screen.y, screen.x);
     c.x = cos(10.0 * angle);
-    c.y = 1.0 * cos(length(screen)*5.0 - time * PI);
+    c.y = 1.0 * cos(length(screen)*5.0 - slowtime * PI);
     
     float maxit = 0.0;
     
