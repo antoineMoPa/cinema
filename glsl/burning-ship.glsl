@@ -32,7 +32,7 @@ void main(void){
     vec4 col = vec4(0.0);
     
     vec2 z = vec2(0.0, 0.0);
-    vec2 c = vec2(x - 0.5, -y + 0.2);
+    vec2 c = vec2(x - 0.5 * ratio, -y + 0.5);
 	c *= 4.0;
     float maxit = 0.0;
     

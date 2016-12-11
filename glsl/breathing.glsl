@@ -32,7 +32,7 @@ void main(void){
     vec4 col = vec4(0.0);
     
     vec2 z = vec2(0.0, 0.0);
-    vec2 c = vec2(-y+0.4, x - 0.5);
+    vec2 c = vec2(-y+0.4, x - 0.5 * ratio);
 	c *= 5.0;
     float maxit = 0.0;
     
@@ -42,7 +42,7 @@ void main(void){
        	
         z = 1.0 * to_the_2(z) + 0.1 * z + c;
         
-        if(length(z) > 4.0 * cos(time * PI2) - 1.8){
+        if(length(z) > 1.0 * cos(time * PI2) + 2.4){
         	maxit = float(i);
         	break;
         }
@@ -52,8 +52,7 @@ void main(void){
    		col.r = 0.8 - maxit/10.0;
     }
     
-    col *= 1.0 - 1.0 * pow(length(vec2(x-0.5,y-0.5)), 2.0);
-    
+    col *= 1.0 - 1.0 * pow(length(vec2(x-0.5 * ratio, y-0.5)), 2.0);
     
     col.a = 1.0;
     
