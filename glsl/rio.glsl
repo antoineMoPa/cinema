@@ -3,12 +3,15 @@ precision highp float;
 
 varying vec2 UV;
 varying vec3 v_position;
+uniform float slowtime;
 uniform float time;
 uniform float ratio;
 
+#define PI2 (2.0 * 3.1416)
+
 vec3 firework(vec2 pos, vec2 fpos, float size,vec3 fcolor, float time_offset){
     vec3 color = vec3(0.0, 0.0, 0.0);
-    float ftime = time + time_offset; 
+    float ftime = slowtime + time_offset; 
     float radius = 1.0 - (distance(fpos, pos)/size);
     float angle = tan((pos.x - fpos.x) / (pos.y - fpos.y));    
     
@@ -253,16 +256,11 @@ vec4 scene(float x, float y){
     if(y > water_height){
         color = above_water(x,y - water_height);
     } else {
-        float water_noise = sin(2.0 * 3.1416 * time * sin(100.0 * y));
+        float water_noise = sin(PI2 * time + sin(300.0 * y) + sin(200.0 * x));
         float water_x = x 
             + 0.003 * water_noise;
         
-        float water_x_2 = x 
-            + 0.005 * sin(2.0 * 3.1416 * time * sin(100.0 * y));
-        
         color = above_water(water_x,water_height - y);
-        
-        //color.rgb = pow(color.rgb, vec3(1.2,1.4,1.3));
         
         // Some nice gradient
         color.rgb += 0.4 * abs(sin(1.4 * x + 4.0))/4.0 + y/4.0;

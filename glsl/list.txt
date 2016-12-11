@@ -12,7 +12,6 @@ cylinders.glsl
 disappear.glsl
 even-wawier.glsl
 fire-fractal.glsl
-glitch-ball-mandelbrot.glsl
 grid.glsl
 jellyfish-more-shading.glsl
 julia-ball.glsl
@@ -22,6 +21,7 @@ mandelblr.glsl
 mandelblr-2.glsl
 mandelbrot.glsl
 mandelbrot-explosion.glsl
+glitch-ball-mandelbrot.glsl
 mandelglitch.glsl
 mandelbrot-ufo.glsl
 matrix-city.glsl
@@ -29,9 +29,6 @@ mod.glsl
 clean-rainbow.glsl
 not-3d-rainbow.glsl
 rainbow-flag.glsl
-penguin-mandelbrot.glsl
-random-typing-on-my-keyboard.glsl
-retro-post-process-frag.glsl
 rio.glsl
 something-yellow-and-red.glsl
 something.glsl

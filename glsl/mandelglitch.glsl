@@ -5,7 +5,7 @@ varying vec2 UV;
 varying vec3 v_position;
 uniform float time;
 uniform float ratio;
-uniform vec2 mouse;
+uniform vec2 smooth_mouse;
 
 #define PI 3.1416
 #define PI2 (2.0 * PI)
@@ -19,7 +19,7 @@ vec4 glitch_ball(vec2 pos){
     y = y - floor(y * 30.0) + time/100.0;
     
     col.r = sin(13.0 * x + y + PI2 * time + 0.3);
-    col.g = sin((13.0 + 0.006 * cos(time*PI2 + 30.0 * pos.x)) * x + y + PI2 * time + 0.3);
+    col.g = 0.3 * sin((13.0 + 0.006 * cos(time*PI2 + 30.0 * pos.x)) * x + y + PI2 * time + 0.3);
     col.b = sin((13.0) * x + y + PI2 * time + 0.3);
     
     col = abs(col);
@@ -51,7 +51,8 @@ void main(void){
     
     vec2 c = vec2( -y + 0.5, x - 0.5 * ratio);
     vec2 z = vec2(0.0, 0.0);
-	c *= 4.0;
+    z = smooth_mouse - vec2(1.0, -0.5);
+	c *= 2.0;
     c.x -= 0.5;
     float maxit = 0.0;
     

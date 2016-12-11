@@ -94,13 +94,9 @@ function cinema(files){
     }
 
     window.onpopstate = function(event){
-        try{
-            var state = event.state;
-            current_file_index = state.index || 0;
-            load_current();
-        } catch (e){
-            // do nothing
-        }
+        var state = event.state;
+        current_file_index = state.index || 0;
+        load_current();
     };
     
     canvas.addEventListener("click", function(){
