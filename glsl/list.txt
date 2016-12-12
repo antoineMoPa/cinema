@@ -16,6 +16,7 @@ grid.glsl
 jellyfish-more-shading.glsl
 julia-ball.glsl
 juliablr.glsl
+julia-unwrap.glsl
 mandelBURN.glsl
 mandelblr.glsl
 mandelblr-2.glsl
