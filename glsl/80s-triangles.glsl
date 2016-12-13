@@ -40,7 +40,7 @@ vec4 grid_with_angle(vec2 pos, float t){
     	return col;
     }
     
-   	if(pos.y > 0.35 ){
+   	if(pos.y > 0.35 && pos.y < 0.4){
     	float fac = 1.0 - pow((pos.y - 0.385)/0.025, 2.0);
         
         fac = 0.5 * fac + pow(fac, 8.0);
@@ -73,7 +73,7 @@ vec4 stars(vec2 pos, float t){
     fac *= sin(-2.0 * (tan(23.4 * pos.x) + sin(12.0 * pos.y)));
     fac *= sin(-2.0 * (cos(3.2 * pos.x + 0.2 * cos(PI2 * time)) + sin(22.0 * pos.y)));
     fac *= cos(50.0 * pos.x + 70.0 * pos.y);
-   	fac = pow(fac,4.0);
+   	fac = pow(fac, 4.0);
     
     float fac2 = abs(pow(fac, 2.0) + 0.1);
     
