@@ -32,14 +32,14 @@ vec4 rainbowcol(int index){
 }
 
 vec4 rainbow(float x, float y, float time){
-    vec4 col;
+    vec4 col = vec4(0.0);
     
     // relative y
     float rely = mod(10.0*y,2.0);
     int bar = int(10.0*y/2.0);
     
     if(rely < sin(3.0 * PI * (0.1 * x + 0.2 * y) + time * PI2)/2.0 + 1.5){
-            col = rainbowcol(bar);
+        col = rainbowcol(bar);
     }
     
     return col;
