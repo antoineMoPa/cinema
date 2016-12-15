@@ -15,7 +15,7 @@ float pixelize(float x){
 }
 
 vec4 rainbowcol(int index){
-    vec4 col;
+    vec4 col = vec4(0.0);
     
     if(index == 0){
         col.rgb = vec3(0.9,0.0,0.0);
@@ -34,7 +34,7 @@ vec4 rainbowcol(int index){
 }
 
 vec4 rainbow(float x, float y, float time){
-    vec4 col;
+    vec4 col = vec4(0.0);
     float original_y = y;
     y += 0.04 * cos(3.0 * x + PI2 * time);
     
