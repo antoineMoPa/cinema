@@ -275,7 +275,13 @@ function cinema(files){
 
         var ratioAttribute = ctx.getUniformLocation(ctx.program, "ratio");
         ctx.uniform1f(ratioAttribute, ratio);
+        
+        var widthAttribute = ctx.getUniformLocation(ctx.program, "width");
+        ctx.uniform1f(widthAttribute, canvas.width);
 
+        var heightAttribute = ctx.getUniformLocation(ctx.program, "height");
+        ctx.uniform1f(heightAttribute, canvas.height); 
+       
         // Mouse
         var x = mouse[0] / can.width * ratio;
         var y = - mouse[1] / can.height;
@@ -317,7 +323,7 @@ function cinema(files){
 
     function draw(){
         draw_ctx(canvas, res_ctx);
-
+        
         window.requestAnimationFrame(draw);
     }
 

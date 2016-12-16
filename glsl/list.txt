@@ -5,7 +5,7 @@ arrows+magnifier.glsl
 blue.glsl
 breathing.glsl
 bridge.glsl
-burning-ship.glsl
+chateau-noir.glsl
 circles.glsl
 cos-sin.glsl
 crazy-sin.glsl
@@ -17,6 +17,7 @@ jellyfish-more-shading.glsl
 julia-ball.glsl
 juliablr.glsl
 julia-unwrap.glsl
+burning-ship.glsl
 mandelBURN.glsl
 mandelblr.glsl
 mandelblr-2.glsl
