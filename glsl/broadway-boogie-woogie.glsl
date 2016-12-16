@@ -29,7 +29,7 @@ float squares(int x, int y){
     return num;
 }
 
-vec4 blocks(int x, int y){
+vec4 blocksf(int x, int y){
     vec4 col = vec4(0.0);
     float fx = float(x);
     float fy = float(y);
@@ -125,7 +125,7 @@ vec4 bbw(int x, int y){
         
     } else {
         col = vec4(0.9, 0.9, 0.9, 1.0);
-        vec4 blocks = blocks(x, y);
+        vec4 blocks = blocksf(x, y);
         col = blocks.a * blocks + (1.0 - blocks.a) * col;
     }
 
