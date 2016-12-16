@@ -82,11 +82,7 @@ float paint_fac(float x, float y){
 }
 
 float jitter(float x){
-	return sin(20.0 * x) + sin(10.0 * x + 0.4 * sin(time * PI2));
-}
-
-float jitter_time(float x){
-	return sin(20.0 * x) + sin(10.0 * x + 0.4 * sin(time * PI2));
+	return sin(20.0 * x) + sin(10.0 * x + 0.7 * sin(time * PI2)) + 0.2 * sin(x + PI2 * time);
 }
 
 vec4 jitter(vec4 col, float x, float y){
@@ -118,7 +114,7 @@ vec4 building(float x, float y){
         	float win_top = 0.01 * pow(1.0 - sin(60.0 * x + 0.0), 3.0) + 0.54;
             
         	if(y < win_top && y > 0.47)
-	        	col -= vec4(0.2);
+	        	col -= vec4(0.24);
         }
     }
     
@@ -144,8 +140,8 @@ void main(void){
     x -= 0.003 * cos(1.0 * num) + 0.003 * cos(80.0 * y);
     y -= 0.003 * cos(1.0 * num) + 0.003 * cos(80.0 * x);
     
-    vec4 paint_blue = vec4(0.3, 0.4, 0.5, 1.0);
-    vec4 paint_trees = vec4(0.04, 0.2, 0.1, 1.0);
+    vec4 paint_blue = vec4(0.2, 0.35, 0.5, 1.0);
+    vec4 paint_trees = vec4(0.04, 0.14, 0.1, 1.0);
 
     vec2 m = 0.05 * (mouse - vec2(0.5));
     float trees_x = 2.0 * m.x + x + 0.2;
