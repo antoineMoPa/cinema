@@ -7,6 +7,7 @@ precision highp float;
 varying vec2 UV;
 varying vec3 v_position;
 uniform float time;
+uniform float slowtime;
 uniform float ratio;
 uniform vec2 mouse;
 
@@ -27,7 +28,10 @@ highp vec2 to_the_2(highp vec2 z){
     return z;
 }
 
-vec4 mandelbrot(float x, float y){
+vec4 mandelbrot(vec2 pos){
+    float x = pos.x;
+    float y = pos.y;
+    
     vec4 col = vec4(0.0);
     vec2 c = vec2( -y + 0.5, x - 0.5);
     vec2 z = vec2(0.0, 0.0);
@@ -63,9 +67,9 @@ vec4 noise(vec2 pos){
 
     float random, other;
 
-    col += 0.6 * (cos(random +  0.2 * other) + 0.5);
+    col += 0.2 * (cos(random +  0.2 * other) + 0.5);
     col = pow(col, vec4(4.0));
-    col += 0.4 * cos(other);
+    col += 0.3 * cos(1000.0 * other + pos.y * 100000.0);
 
     if(length(col) < 0.3){
         col *= 0.1;
@@ -94,8 +98,8 @@ vec4 shell(vec2 pos){
             float dd = distance(pos, vec2(0.43,-0.506));
             
             if(dd < 0.02){
-                if(dd < 0.01){
-                    col += 0.2;
+                if(dd < 0.003){
+                    col += 0.1;
                 }
                 col += 0.06 * (1.0 - dd/0.02);
             }
@@ -138,7 +142,33 @@ void main(void){
     
     
     if(col.a < 0.01){
-        col += vec4(0.0);
+        if(pos.y > -0.1){
+            float f1 = 0.05 * cos(2.0 * x + slowtime * PI2);
+            float f2 = 0.05 * cos(2.2 * x + slowtime * PI2 + 1.4);
+            float f3 = 0.04 * cos(2.3 * x + slowtime * PI2 + 1.9);
+            float f4 = 0.03 * cos(2.3 * x + slowtime * PI2 + 2.6);
+            
+            if(f1 > pos.y){
+                col.rgb += 0.2 * vec3(0.5, 0.1, 0.1);
+            } else if (f2 > pos.y){
+                col.rgb += 0.2 * vec3(0.1, 0.1, 0.3);
+            } else if (f3 > pos.y){
+                col.rgb += 0.2 * vec3(0.4, 0.1, 0.3);
+            } else if (f4 > pos.y){
+                col.rgb += 0.2 * vec3(0.4, 0.5, 0.1);
+            }
+        } else {
+            float gradient = pos.y + 0.5 + 0.3 * abs(cos(pos.x));
+            col.rgb += vec3(1.2 * pow(gradient,3.0),0.1 * gradient,0.3 * gradient);
+        }
+        float angle = atan(pos.y, pos.x);
+        float ddd = distance(pos,vec2(0.0));
+        col += 0.0001 * pow((ratio - ddd),10.0);
+        col += 0.01 * pow((ratio - ddd),2.0);
+        col += 0.004 * pow((cos(20.0 * angle + slowtime * PI2 + cos(10.0 * ddd + PI2 * slowtime)) + 0.5),2.0);
+        pos += 0.01 * cos(col.r + slowtime * PI2 + col.g + 40.0 * pos.y);
+        col = pow(col, 0.8 + 0.7 * mandelbrot((pos * vec2(0.1) + vec2(0.5, 0.48))));
+        col *= 0.3;
     }
     
     col.a = 1.0;
