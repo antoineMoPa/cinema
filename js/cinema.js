@@ -15,7 +15,8 @@ function load_file(filename, callback){
         try{
             var xhr = new XMLHttpRequest;
             xhr.open('GET', "./" + filename, true);
-            xhr.onreadystatechange = function(){
+            xhr.overrideMimeType('text/plain');
+            xhr.onreadystatechange = function(e){
                 if (4 == xhr.readyState) {
                     var val = xhr.responseText;
                     callback(val);
@@ -28,28 +29,45 @@ function load_file(filename, callback){
     }
 }
 
+function parse_hooks(files){
+    var filesObject = [];
+    
+    // Remove empty lines
+    for(var f in files){
+        var splitted = files[f].split(" ")
+        filesObject.push({
+            name: splitted[0],
+            hooks: splitted[1] || null
+        });
+    }
+
+    return filesObject;
+}
+
 load_file("glsl/list.txt", function(files){
     var files = files.split("\n");
 
     // Remove empty lines
-    for(f in files){
+    for(var f in files){
         if(files[f] == ""){
             files.splice(f, 1);
         }
     }
+    
+    files = parse_hooks(files);
 
     cinema(files);
 });
 
 function cinema(files){
     var current_file_index = 0;
-    var current_file_name = files[0];
-
+    var current_script = null;
     var anim_len = 10;
     var anim_delay = 100;
     var frame = 0;
     var mouse = [0.0, 0.0];
     var smooth_mouse = [0.0, 0.0];
+    var hooks;
 
     // The main canvas
     var canvas = qsa(".result-canvas")[0];
@@ -80,6 +98,19 @@ function cinema(files){
 
     enable_mouse(canvas);
 
+    function update_hooks(new_hooks){
+        hooks = {};
+        hooks.init = new_hooks.init || function(){};
+        hooks.before_render = new_hooks.before_render || function(){};
+
+        hooks.init = hooks.init(res_ctx);
+    }
+
+    // an alias
+    window.update_hooks = function(nh){
+        update_hooks(nh);
+    };
+    
     function next_file(){
         current_file_index++;
         current_file_index = current_file_index % (files.length - 1);
@@ -106,25 +137,44 @@ function cinema(files){
     function add_to_history(){
         // Add to browser history to enable
         // Back button
-        var name = files[current_file_index];
+        var name = files[current_file_index].name;
         var url = window.location.href.replace(/\?.*$/,"");
         url += "?file=" + name;
 
         window.history.pushState(
             {index: current_file_index},
-            name, url
+            name,
+            url
         );
     }
 
     function load_current(){
         var title = qsa(".cinema-title a")[0];
-        var name = files[current_file_index];
+        var name = files[current_file_index].name;
+        var file_hooks = files[current_file_index].hooks;
+        
         var url = window.location.href.replace(/\?.*$/,"");
         url += "?file=" + name;
         title.href = url;
         var indicator = (current_file_index + 1) + " of " + (files.length - 1);
         title.innerHTML = name + " [" + indicator + "]";
         load_file("./glsl/" + name, update_shader);
+
+        var new_script = null;
+        
+        if(file_hooks != null){
+            new_script = document.createElement("script");
+            new_script.setAttribute("src", "glsl/" + file_hooks);
+            new_script.setAttribute("type", "text/javascript");
+
+            document.body.appendChild(new_script);
+        }
+
+    if(current_script != null){
+            document.body.removeChild(current_script);
+        }
+    
+        current_script = new_script;
     }
 
     window.onpopstate = function(event){
@@ -297,9 +347,13 @@ function cinema(files){
         var smAttribute = ctx.getUniformLocation(
             ctx.program, "smooth_mouse"
         );
-
+        
         ctx.uniform2fv(smAttribute, smooth_mouse);
-
+        
+        if(typeof(hooks) != "undefined"){
+            hooks.before_render(ctx);
+        }
+        
         ctx.drawArrays(ctx.TRIANGLE_STRIP, 0, 4);
 
         ctx.viewport(0, 0, can.width, can.height);
@@ -313,10 +367,23 @@ function cinema(files){
 
     if(match != null){
         var name = match[1];
-        var index = files.indexOf(name);
-        current_file_index = index;
-    }
+        var index = -1;
 
+        var i = 0;
+        
+        while(i < files.length){
+            if(files[i].name == name){
+                index = i;
+                break; 
+            }
+            i++;
+        }
+
+        current_file_index = index;
+    } else {
+        current_file_index = 0;
+    }
+    
     add_to_history();
     
     load_current();

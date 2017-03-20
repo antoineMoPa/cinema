@@ -1,3 +1,4 @@
+hacker-shell.glsl hacker-shell.js
 broadway-boogie-woogie.glsl
 80s-triangles.glsl
 arrow-shader.glsl
